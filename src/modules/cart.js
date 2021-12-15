@@ -91,7 +91,7 @@ const cart = function () {
 
             const totalCartPrice = goods.reduce((acc,good) => good.price * good.count + acc, 0)
             console.log(totalCartPrice);
-            total.textContent = totalCartPrice
+            total.textContent = totalCartPrice + '$'
             tr.addEventListener('click', (e) => {
                 
                 if(e.target.classList.contains('cart-btn-minus')) {
@@ -130,6 +130,10 @@ const cart = function () {
         const phone = e.target.elements.phoneCustomer.value
 
         sendForm(name, phone)
+
+        total.textContent = "0"
+        modalForm.reset();
+
     })
 
     cartBtn.addEventListener('click', function () {
@@ -156,4 +160,4 @@ const cart = function () {
     }
 }
 
-cart();
+export default cart

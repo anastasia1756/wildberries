@@ -1,0 +1,28 @@
+{
+  "name": "wildberries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anastasia1756/wildberries.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anastasia1756/wildberries/issues"
+  },
+  "homepage": "https://github.com/anastasia1756/wildberries#readme",
+  "devDependencies": {
+    "webpack": "^5.64.3",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "swiper": "^7.3.1"
+  }
+}

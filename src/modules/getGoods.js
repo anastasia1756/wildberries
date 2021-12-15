@@ -70,4 +70,5 @@ const getGoods = () => {
         });
     } 
 }
-getGoods();
+
+export default getGoods
