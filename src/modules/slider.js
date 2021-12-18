@@ -3,7 +3,6 @@ import Swiper, { Autoplay, Navigation, Pagination } from 'swiper';
 Swiper.use([Navigation, Pagination, Autoplay]);
 
 const slider = () => {
-    console.log("slider");
     const swiper = new Swiper(".swiper-container", {
         loop: true,
         autoplay: {

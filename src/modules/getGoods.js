@@ -1,21 +1,19 @@
 const getGoods = () => {
-    const links = document.querySelectorAll('.navigation-link');
-    const more = document.querySelector('.more');
-    
+  const links = document.querySelectorAll('.navigation-link');
+  const more = document.querySelector('.more');
 
-    const renderGoods = (goods) => {
+  const renderGoods = (goods) => {
     const goodsContainer = document.querySelector('.long-goods-list');
 
     goodsContainer.innerHTML = '';
 
+    goods.forEach((good) => {
+      const goodBlock = document.createElement('div');
 
-    goods.forEach(good => {
-        const goodBlock = document.createElement('div');
+      goodBlock.classList.add('col-lg-3');
+      goodBlock.classList.add('col-sm-6');
 
-        goodBlock.classList.add('col-lg-3');
-        goodBlock.classList.add('col-sm-6');
-
-        goodBlock.innerHTML = `
+      goodBlock.innerHTML = `
             <div class="goods-card">
 				<span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
 				<img src="db/${good.img}" alt="${good.name}" class="goods-image">
@@ -25,50 +23,53 @@ const getGoods = () => {
 				    <span class="button-price">$${good.price}</span>
 				</button>
 			</div>
-        `
-        goodsContainer.append(goodBlock);
-    })
-    }
+        `;
+      goodsContainer.append(goodBlock);
+    });
+  };
 
-    const getData = (value, category) => {
-        fetch('https://myproject-aaeeb-default-rtdb.firebaseio.com/db.json')
-        .then(res => res.json())
-        .then(data => {
-            const array = category ? data.filter(item => item[category] === value) : data;
-        
+  const getData = (value, category) => {
+    fetch('https://myproject-aaeeb-default-rtdb.firebaseio.com/db.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const array = category
+          ? data.filter((item) => item[category] === value)
+          : data;
 
-            localStorage.setItem('goods', JSON.stringify(array));
+        localStorage.setItem('goods', JSON.stringify(array));
 
-            if(window.location.pathname !== '/goods.html') {
-                window.location.href = '/goods.html';
-            } else {
-                renderGoods(array);
-            }
-        });
-    }
+        if (window.location.pathname !== '../../goods.html') {
+          window.location.href = '../../goods.html';
+        } else {
+          renderGoods(array);
+        }
+      });
+  };
 
-    
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
 
-            const linkValue = link.textContent;
-            const category = link.dataset.field;
+      const linkValue = link.textContent;
+      const category = link.dataset.field;
 
-            getData(linkValue, category);
-        })
-    })
+      getData(linkValue, category);
+    });
+  });
 
-    if(window.location.pathname === '/goods.html' && localStorage.getItem('goods')) {
-        renderGoods(JSON.parse(localStorage.getItem('goods')));
-    }
+  if (
+    window.location.pathname === '../../goods.html' &&
+    localStorage.getItem('goods')
+  ) {
+    renderGoods(JSON.parse(localStorage.getItem('goods')));
+  }
 
-    if(more) {
-        more.addEventListener("click", () => {
-            event.preventDefault();
-            getData();
-        });
-    } 
-}
+  if (more) {
+    more.addEventListener('click', () => {
+      event.preventDefault();
+      getData();
+    });
+  }
+};
 
-export default getGoods
+export default getGoods;
