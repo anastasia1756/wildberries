@@ -38,8 +38,8 @@ const getGoods = () => {
 
         localStorage.setItem('goods', JSON.stringify(array));
 
-        if (window.location.pathname !== './goods.html') {
-          window.location.href = './goods.html';
+        if (!window.location.pathname.includes('goods.html')) {
+          window.location.href = 'goods.html';
         } else {
           renderGoods(array);
         }
@@ -56,16 +56,13 @@ const getGoods = () => {
       getData(linkValue, category);
     });
   });
-
-  if (
-    window.location.pathname === './goods.html' &&
-    localStorage.getItem('goods')
-  ) {
-    renderGoods(JSON.parse(localStorage.getItem('goods')));
+  const data = JSON.parse(localStorage.getItem('goods'));
+  if (data && window.location.pathname.includes('goods.html')) {
+    renderGoods(data);
   }
 
   if (more) {
-    more.addEventListener('click', () => {
+    more.addEventListener('click', (event) => {
       event.preventDefault();
       getData();
     });
