@@ -1,8 +1,4 @@
-const getGoods = () => {
-  const links = document.querySelectorAll('.navigation-link');
-  const more = document.querySelector('.more');
-
-  const renderGoods = (goods) => {
+export const renderGoods = (goods) => {
     const goodsContainer = document.querySelector('.long-goods-list');
 
     goodsContainer.innerHTML = '';
@@ -27,9 +23,15 @@ const getGoods = () => {
       goodsContainer.append(goodBlock);
     });
   };
+  
+  const getGoods = () => {
+  const links = document.querySelectorAll('.navigation-link');
+  const more = document.querySelector('.more');
+
+
 
   const getData = (value, category) => {
-    fetch('https://myproject-aaeeb-default-rtdb.firebaseio.com/db.json')
+    fetch('https://wildberries-default-rtdb.firebaseio.com/db.json')
       .then((res) => res.json())
       .then((data) => {
         const array = category
